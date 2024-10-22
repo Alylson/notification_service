@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_10_21_131715) do
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "task_id"
     t.text "extracted_data"
     t.integer "user_id"

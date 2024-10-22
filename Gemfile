@@ -72,3 +72,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 
 gem 'mysql2', '>= 0.5'
+
+gem 'faraday'
+
+gem 'dotenv-rails', groups: [:development, :test]
