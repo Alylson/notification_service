@@ -3,15 +3,22 @@ class NotificationsController < ApplicationController
         task = params[:task_id]
         extracted_data = params[:notification_payload]
         
-        if extracted_data[:price].nil? || extracted_data[:brand].nil? || extracted_data[:model].nil?
+        if task.nil? 
             render json: { error: 'Missing data in notification payload' }, status: :bad_request
             return
         end
 
-        notification = Notification.new(
-            task_id: task,
-            extracted_data: "Preço #{extracted_data[:price]}. Marca #{extracted_data[:brand]}. Modelo: #{extracted_data[:model]}."
-        )
+        notification = if extracted_data.present?
+            Notification.new(
+                task_id: task,
+                extracted_data: "Price #{extracted_data[:price]}. Brand #{extracted_data[:brand]}. Model: #{extracted_data[:model]}."
+            )
+        else
+            Notification.new(
+              task_id: task,
+              extracted_data: "Task created."
+            )
+          end
       
         if notification.save
             render json: { message: "Notification created and sent successfully" }, status: :created
@@ -20,4 +27,3 @@ class NotificationsController < ApplicationController
         end
     end
 end
-  
